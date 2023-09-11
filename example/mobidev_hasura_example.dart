@@ -1,7 +1,7 @@
 import 'package:mobidev_hasura/src/hasura.dart';
 final String endpoint = "";
-final String token = "";
-final String testTable = "";
+final String token = "aaa";
+final String testTable = "aaa";
 
 void main() async {
   Hasura hasura = Hasura(endpoint: endpoint, token: token);
@@ -10,6 +10,7 @@ void main() async {
 }
 
 Future<void> _upsertTest(Hasura hasura) async {
+
   var response = await hasura.upsert(
     table: 'teste_one', 
     object: {"name": "ddddd", "code": 17}, 
