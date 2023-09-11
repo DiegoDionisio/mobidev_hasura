@@ -1,6 +1,8 @@
 import 'package:mobidev_hasura/src/hasura.dart';
 final String endpoint = "";
 final String token = "";
+final String testTable = "";
+
 void main() async {
   Hasura hasura = Hasura(endpoint: endpoint, token: token);
   await _upsertTest(hasura);
