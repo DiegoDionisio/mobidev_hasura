@@ -1,6 +1,6 @@
 import 'package:mobidev_hasura/src/hasura.dart';
-final String endpoint = "https://gql.mobidev.com.br/v1/graphql";
-final String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMiwiaHR0cHM6Ly9oYXN1cmEuaW8vand0L2NsYWltcyI6eyJ4LWhhc3VyYS1kZWZhdWx0LXJvbGUiOiJ1c2VyIiwieC1oYXN1cmEtYWxsb3dlZC1yb2xlcyI6WyJ1c2VyIl0sIngtaGFzdXJhLXVzZXItaWQiOiIwIiwieC1oYXN1cmEtb3JnLWlkIjoiNDU2IiwieC1oYXN1cmEtY3VzdG9tIjoiMCIsIngtaGFzdXJhLXRhYmxlIjoidGVzdGUifX0.QgWHpsDp247sWMKwLcA3k4VURh9T7Kh57kXIE9AcUcs";
+final String endpoint = "";
+final String token = "";
 void main() async {
   Hasura hasura = Hasura(endpoint: endpoint, token: token);
   await _upsertTest(hasura);
