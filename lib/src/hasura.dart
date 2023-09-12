@@ -103,10 +103,13 @@ class Hasura {
 
   }
 
-
   Future<IResponse> rawQuery({required String graphqlQuery, Map<String, String>? headers}) async {
     var response = await _execute(graphqlQuery, headers: headers);
     return HasuraReponse(response);
+  }
+
+  Future<IResponse> rawQMutation({required String graphqlQuery, Map<String, String>? headers}) async {
+    return rawQuery(graphqlQuery: graphqlQuery, headers: headers);
   }
 
 // mutation upsertAllMutation {
