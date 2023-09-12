@@ -84,7 +84,6 @@ class Hasura {
         }
       }
     ''';
-    // print(gqlUpsert);
     return gqlUpsert;
 
   }
@@ -98,7 +97,6 @@ class Hasura {
         }
       }
     ''';
-    // print(gqlUpsert);
     return gqlUpsert;
 
   }
@@ -111,17 +109,4 @@ class Hasura {
   Future<IResponse> rawQMutation({required String graphqlQuery, Map<String, String>? headers}) async {
     return rawQuery(graphqlQuery: graphqlQuery, headers: headers);
   }
-
-// mutation upsertAllMutation {
-//   insert_teste(objects: {code: 10, name: "88888"}, on_conflict: {where: {code: {_gte: 10}, name: {_eq: "sssss"}}, update_columns: code}) {
-//     returning {
-//       id
-//       code
-//       name
-//     }
-//   }
-// }
-
-
-
 }
