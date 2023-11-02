@@ -1,14 +1,14 @@
 name: mobidev_hasura
-description: A starting point for Dart libraries or applications.
+description: Easy handling of hasura's features.
 version: 1.0.1
-# repository: https://github.com/my_org/my_repo
+repository: https://github.com/DiegoDionisio/mobidev_hasura/
 
 environment:
   sdk: ^3.1.0
 
 # Add regular dependencies here.
 dependencies:
-  dio:
+  dio: ^5.3.3
 
 dev_dependencies:
   lints: ^2.0.0
