@@ -10,14 +10,11 @@ class Hasura {
 
   Hasura({required String endpoint, this.token}) : _endpoint = endpoint;
 
-  Future<IResponse> query({
-    required String table,
-    Map<String, dynamic>? where,
-    Map<String, String>? headers,
-    required Set<dynamic> fields
-
-  }) async {
-    
+  Future<IResponse> query(
+      {required String table,
+      Map<String, dynamic>? where,
+      Map<String, String>? headers,
+      required Set<dynamic> fields}) async {
     var gqlQuery = _createQuery(table, where ?? {}, fields);
     print(gqlQuery);
     var response = await _execute(gqlQuery, headers: headers);
@@ -32,8 +29,8 @@ class Hasura {
     required Set<String> returning,
     Map<String, String>? headers,
   }) async {
-    
-    var gqlQuery = _createUpsert(table, object, constraint, onConflictUpdateColumns, returning);
+    var gqlQuery = _createUpsert(
+        table, object, constraint, onConflictUpdateColumns, returning);
     print(gqlQuery);
     var response = await _execute(gqlQuery, headers: headers);
     return HasuraReponse(response);
@@ -47,22 +44,34 @@ class Hasura {
     required Set<String> returning,
     Map<String, String>? headers,
   }) async {
-    String gqlQuery = _createUpsertAll(table, objects, where, onConflictUpdateColumns, returning);
+    String gqlQuery = _createUpsertAll(
+        table, objects, where, onConflictUpdateColumns, returning);
     var response = await _execute(gqlQuery, headers: headers);
     return HasuraReponse(response);
   }
 
-  Future<Response> _execute(String gqlQuery, {Map<String, String>? headers}) async {
+  Future<Response> _execute(String gqlQuery,
+      {Map<String, String>? headers, Map<String, dynamic>? variables}) async {
     Map<String, String> tmpHeaders = headers ?? {};
-    if(token != null && !tmpHeaders.keys.map((e) => e.toLowerCase()).contains('authorization')) {
-      tmpHeaders.addAll({'Authorization' : "Bearer $token"});
+    if (token != null &&
+        !tmpHeaders.keys
+            .map((e) => e.toLowerCase())
+            .contains('authorization')) {
+      tmpHeaders.addAll({'Authorization': "Bearer $token"});
     }
-    return await Dio().post(_endpoint, data: {"query" : gqlQuery}, options: Options(headers: tmpHeaders));
+
+    Map<String, dynamic> postPayload = {"query": gqlQuery};
+    if (variables != null && variables.isNotEmpty) {
+      postPayload.addAll({'variables': variables});
+    }
+    return await Dio().post(_endpoint,
+        data: postPayload, options: Options(headers: tmpHeaders));
   }
 
-  String _createQuery(String table, Map<String, dynamic> where, Set<dynamic> returning) {
+  String _createQuery(
+      String table, Map<String, dynamic> where, Set<dynamic> returning) {
     String tmpWhere = '';
-    if(where.isNotEmpty) {
+    if (where.isNotEmpty) {
       tmpWhere = '(where: ${where.xToHasura()})';
     }
     var gqlQuery = '''
@@ -75,8 +84,11 @@ class Hasura {
     return GraphqlQueryCompressor().call(gqlQuery);
   }
 
-  String _createUpsert(table, Map<String, dynamic> object, String constraint, Set<String> onConflictUpdateColumns, Set<String> returning) {
-    String upsertConstraint  = constraint.isEmpty  ? '' : ', on_conflict: {constraint: $constraint, update_columns: [${onConflictUpdateColumns.join(',')}]}';
+  String _createUpsert(table, Map<String, dynamic> object, String constraint,
+      Set<String> onConflictUpdateColumns, Set<String> returning) {
+    String upsertConstraint = constraint.isEmpty
+        ? ''
+        : ', on_conflict: {constraint: $constraint, update_columns: [${onConflictUpdateColumns.join(',')}]}';
     var gqlUpsert = '''
       mutation upsertMutation {
         insert_$table${'_one'}(object: ${object.xToHasura()}$upsertConstraint) {
@@ -85,11 +97,17 @@ class Hasura {
       }
     ''';
     return gqlUpsert;
-
   }
 
-   String _createUpsertAll(table, List<dynamic> objects, Map<String, dynamic> where, Set<String> onConflictUpdateColumns, Set<String> returning) {
-    String upsertConstraint  = onConflictUpdateColumns.isEmpty  ? '' : ', on_conflict: {constraint: where: ${where.xToHasura()}, update_columns: [${onConflictUpdateColumns.join(',')}]}';
+  String _createUpsertAll(
+      table,
+      List<dynamic> objects,
+      Map<String, dynamic> where,
+      Set<String> onConflictUpdateColumns,
+      Set<String> returning) {
+    String upsertConstraint = onConflictUpdateColumns.isEmpty
+        ? ''
+        : ', on_conflict: {constraint: where: ${where.xToHasura()}, update_columns: [${onConflictUpdateColumns.join(',')}]}';
     var gqlUpsert = '''
       mutation upsertAllMutation {
         insert_$table(objects: ${objects.toList()}$upsertConstraint) {
@@ -98,15 +116,19 @@ class Hasura {
       }
     ''';
     return gqlUpsert;
-
   }
 
-  Future<IResponse> rawQuery({required String graphqlQuery, Map<String, String>? headers}) async {
-    var response = await _execute(graphqlQuery, headers: headers);
+  Future<IResponse> rawQuery(
+      {required String graphqlQuery,
+      Map<String, String>? headers,
+      Map<String, dynamic>? variables}) async {
+    var response =
+        await _execute(graphqlQuery, headers: headers, variables: variables);
     return HasuraReponse(response);
   }
 
-  Future<IResponse> rawQMutation({required String graphqlQuery, Map<String, String>? headers}) async {
+  Future<IResponse> rawQMutation(
+      {required String graphqlQuery, Map<String, String>? headers}) async {
     return rawQuery(graphqlQuery: graphqlQuery, headers: headers);
   }
 }

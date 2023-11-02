@@ -7,9 +7,9 @@ extension JsonMapUtils<K, V> on Map<String, dynamic> {
     var tmp = map.entries;
     List<String> fields = [];
     for (var entry in tmp) {
-      if(entry.value is String) {
+      if (entry.value is String) {
         fields.add('${entry.key}: "${entry.value}"');
-      } else if(entry.value is Map) {
+      } else if (entry.value is Map) {
         var tmpFields = _mapToHasura(entry.value).join(',');
         fields.add('${entry.key}: {$tmpFields}');
       } else {

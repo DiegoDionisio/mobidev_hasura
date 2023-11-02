@@ -8,7 +8,7 @@ enum _CharType {
   symbolThatDoesNotNeedSpace,
 }
 
-class GraphqlQueryCompressor {  
+class GraphqlQueryCompressor {
   static final instance = GraphqlQueryCompressor._();
 
   final _symbolsThatDoNotNeedSpace = ["{", "}", "(", ")", ":", ",", "."]
