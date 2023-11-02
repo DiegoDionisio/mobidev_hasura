@@ -1,5 +1,3 @@
-/// [compressGraphqlQuery] eliminate unnecessary characters from a GraphQL query.
-/// You may use [GraphqlQueryCompressor] to inject this package and make your code testable
 String compressGraphqlQuery(String query) =>
     GraphqlQueryCompressor.instance(query);
 
@@ -10,26 +8,7 @@ enum _CharType {
   symbolThatDoesNotNeedSpace,
 }
 
-/// [GraphqlQueryCompressor] is a injectable version from [compressGraphqlQuery], it is specially designed for you, that like pretty codes
-/// Since the code is executed by [call], you can use this class as an use case:
-///
-/// class MyClass{
-///   final GraphqlQueryCompressor compressor;
-///   MyClass(this.compressor);
-///
-///   void fun(String query){
-///     final compressed = compressor(query);
-///   }
-///
-class GraphqlQueryCompressor {
-  // I know what you are thinking: "this guy doesn't know _Regex_" (...do you? 🤡)
-  // There are some fancy implementations for this, like this popular one for JS: https://github.com/rse/graphql-query-compress/blob/master/src/graphql-query-compress.js
-  // Question is: do we really need to compile 15 regexes, parse the query transforming it in a tree, eliminate unwanted elements and serialize it again?
-  // We only want to eliminate some characters in a string, we can do it in a single for! Since this function is intent to be used on the fly, this seams to be faster
-  // God bless you and I must seek forgiveness from my CC teachers.
-
-  // since most apps will use it several times, we preserve an instance to keep all generated lists ready to go
-  // remember: `static` in dart is lazy by default ;-)
+class GraphqlQueryCompressor {  
   static final instance = GraphqlQueryCompressor._();
 
   final _symbolsThatDoNotNeedSpace = ["{", "}", "(", ")", ":", ",", "."]
@@ -107,7 +86,6 @@ class GraphqlQueryCompressor {
         continue;
       }
     }
-
     return String.fromCharCodes(output);
   }
 }

@@ -1,12 +1,11 @@
 name: mobidev_hasura
 description: Easy handling of hasura's features.
-version: 1.0.1
+version: 0.1.0
 repository: https://github.com/DiegoDionisio/mobidev_hasura/
 
 environment:
   sdk: ^3.1.0
 
-# Add regular dependencies here.
 dependencies:
   dio: ^5.3.3
 
