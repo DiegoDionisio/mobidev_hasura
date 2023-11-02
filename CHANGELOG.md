@@ -5,3 +5,8 @@
 ## 0.1.1
 
 - Added query "variables" option.
+
+## 0.1.2
+
+- Added initial docs.
+
