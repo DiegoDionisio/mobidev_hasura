@@ -10,6 +10,7 @@ class Hasura {
 
   Hasura({required String endpoint, this.token}) : _endpoint = endpoint;
 
+  ///Execute a query and get an interface response helper as result
   Future<IResponse> query(
       {required String table,
       Map<String, dynamic>? where,
@@ -21,6 +22,7 @@ class Hasura {
     return HasuraReponse(response);
   }
 
+  ///Execute a mutation that try to insert, update if fails.
   Future<IResponse> upsert({
     required String table,
     required Map<String, dynamic> object,
@@ -36,6 +38,7 @@ class Hasura {
     return HasuraReponse(response);
   }
 
+  ///Execute upsert in multiple objects.
   Future<IResponse> upsertAll({
     required String table,
     required List<dynamic> objects,
@@ -118,6 +121,7 @@ class Hasura {
     return gqlUpsert;
   }
 
+  ///Execute a hasura query from custom string.
   Future<IResponse> rawQuery(
       {required String graphqlQuery,
       Map<String, String>? headers,
@@ -127,6 +131,7 @@ class Hasura {
     return HasuraReponse(response);
   }
 
+  ///Execute a mutation from custom string.
   Future<IResponse> rawQMutation(
       {required String graphqlQuery, Map<String, String>? headers}) async {
     return rawQuery(graphqlQuery: graphqlQuery, headers: headers);
