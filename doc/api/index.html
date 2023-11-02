@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="generator" content="made with love by dartdoc 7.0.0-dev">
+  <meta name="description" content="mobidev_hasura API docs, for the Dart programming language.">
+  <title>mobidev_hasura - Dart API docs</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="static-assets/github.css?v1">
+  <link rel="stylesheet" href="static-assets/styles.css?v1">
+  <link rel="icon" href="static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li class="self-crumb">mobidev_hasura package</li>
+  </ol>
+  <div class="self-name">mobidev_hasura</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        brightness_4
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        brightness_5
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+  <div id="dartdoc-main-content" class="main-content">
+      
+<section class="desc markdown">
+  <!-- 
+This README describes the package. If you publish this package to pub.dev,
+this README's contents appear on the landing page for your package.
+
+For information about how to write a good package README, see the guide for
+[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+
+For general information about developing packages, see the Dart guide for
+[creating packages](https://dart.dev/guides/libraries/create-library-packages)
+and the Flutter guide for
+[developing packages and plugins](https://flutter.dev/developing-packages). 
+-->
+<p>Easily execute Hasura's query and mutations, without the need of any other package.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Query</li>
+<li>Upsert (mutation)</li>
+<li>rawQuery</li>
+<li>rawMutation</li>
+</ul>
+<h2 id="getting-started">Getting started</h2>
+<p>Add <strong>mobidev_hasura</strong> to your pubspec.yaml</p>
+<p>import the package:</p>
+<pre class="language-dart"><code>import 'package:mobidev_hasura/mobidev_hasura.dart';
+</code></pre>
+<h2 id="usage">Usage</h2>
+<pre class="language-dart"><code class="language-dart">    var hasura = Hasura(
+        endpoint: 'https://myendpoint.com/v1/graphql',
+        token: 'my jwt token here'
+    );
+
+    var result = await hasura.query(table: 'customers', fields: {
+      'name',
+      'address',
+      'phone'
+    }, where: {
+      'name': {'_eq': 'josh'}
+    });
+
+    if (result.isOk) {
+      Map&lt;String, dynamic&gt; myRetrievedData = result.body;
+      //Do anything with your data      
+    }
+</code></pre>
+<h2 id="additional-information">Additional information</h2>
+<p>This is the initial release.</p>
+<p>New features will be added soon.</p>
+</section>
+
+
+      <section class="summary">
+          <h2>Libraries</h2>
+        <dl>
+          <dt id="mobidev_hasura">
+  <span class="name"><a href="mobidev_hasura/mobidev_hasura-library.html">mobidev_hasura</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+        </dl>
+      </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li class="self-crumb">mobidev_hasura package</li>
+</ol>
+
+
+    <h5 class="hidden-xs"><span class="package-name">mobidev_hasura</span> <span class="package-kind">package</span></h5>
+    <ol>
+      <li class="section-title">Libraries</li>
+      <li><a href="mobidev_hasura/mobidev_hasura-library.html">mobidev_hasura</a></li>
+</ol>
+
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div>
+
+</main>
+
+<footer>
+  <span class="no-break">
+    mobidev_hasura
+      0.1.1
+  </span>
+
+  
+</footer>
+
+
+
+<script src="static-assets/highlight.pack.js?v1"></script>
+<script src="static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+
