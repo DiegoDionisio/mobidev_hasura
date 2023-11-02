@@ -15,6 +15,8 @@ void main() async {
 
   if (result.isOk) {
     Map<String, dynamic> myRetrievedData = result.body;
-    //Do anything with your data
+    if(myRetrievedData.isNotEmpty) {
+      //Do anything with your data
+    }
   }
 }
