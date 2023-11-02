@@ -1,6 +1,6 @@
 name: mobidev_hasura
 description: Easy handling of hasura's features. Like Query, Mutations and Upsert (mutation).
-version: 0.1.1
+version: 0.1.2
 repository: https://github.com/DiegoDionisio/mobidev_hasura/
 
 environment:
